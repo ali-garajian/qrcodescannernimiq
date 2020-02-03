@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>qrcode scanner with nimiq</title>
+
+    <script src="./qr-scanner-master/qr-scanner-worker.min.js"></script>
+  </head>
+  <body>
+    <video id="preview"></video>
+    <div id="output"></div>
+    <button id="start-scan-btn">start scanning</button>
+  </body>
+  <script type="module">
+    import QrScanner from "./qr-scanner-master/qr-scanner.min.js";
+    QrScanner.WORKER_PATH = "./qr-scanner-master/qr-scanner-worker.min.js";
+
+    document.getElementById("start-scan-btn", () => {
+      const qrscanner = new QrScanner(
+        document.getElementById("preview"),
+        result => {
+          let output = document.getElementById("output");
+          output.innerText += result + "\n";
+
+          qrscanner.destroy();
+        }
+      );
+    });
+  </script>
+</html>
