@@ -16,28 +16,25 @@
   <script type="module">
     import QrScanner from "./qr-scanner-master/qr-scanner.min.js";
     QrScanner.WORKER_PATH = "./qr-scanner-master/qr-scanner-worker.min.js";
-    var hasCamera = false;
-    QrScanner.hasCamera().then(hc => {
-      console.log(hc);
-      hasCamera = hc;
-    });
-    if (hasCamera) {
-      document
-        .getElementById("start-scan-btn")
-        .addEventListener("click", () => {
-          const qrscanner = new QrScanner(
-            document.getElementById("preview"),
-            result => {
-              let output = document.getElementById("output");
-              output.innerText += result + "\n";
+    QrScanner.hasCamera().then(hasCamera => {
+      if (hasCamera) {
+        document
+          .getElementById("start-scan-btn")
+          .addEventListener("click", () => {
+            const qrscanner = new QrScanner(
+              document.getElementById("preview"),
+              result => {
+                let output = document.getElementById("output");
+                output.innerText += result + "\n";
 
-              qrscanner.destroy();
-            }
-          );
-        });
-      qrscanner.start();
-    } else {
-      alert("this device has no camera");
-    }
+                qrscanner.destroy();
+              }
+            );
+          });
+        qrscanner.start();
+      } else {
+        alert("this device has no camera");
+      }
+    });
   </script>
 </html>
