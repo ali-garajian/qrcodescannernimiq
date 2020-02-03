@@ -17,7 +17,10 @@
     import QrScanner from "./qr-scanner-master/qr-scanner.min.js";
     QrScanner.WORKER_PATH = "./qr-scanner-master/qr-scanner-worker.min.js";
     let hasCamera = false;
-    QrScanner.hasCamera().then(hc => (hasCamera = hc));
+    QrScanner.hasCamera().then(hc => {
+      console.log(hc);
+      hasCamera = hc;
+    });
     if (hasCamera) {
       document
         .getElementById("start-scan-btn")
@@ -34,7 +37,7 @@
         });
       qrscanner.start();
     } else {
-        alert("this device has no camera");
+      alert("this device has no camera");
     }
   </script>
 </html>
