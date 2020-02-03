@@ -17,7 +17,7 @@
     import QrScanner from "./qr-scanner-master/qr-scanner.min.js";
     QrScanner.WORKER_PATH = "./qr-scanner-master/qr-scanner-worker.min.js";
 
-    document.getElementById("start-scan-btn", () => {
+    document.getElementById("start-scan-btn").addEventListener("click", () => {
       const qrscanner = new QrScanner(
         document.getElementById("preview"),
         result => {
